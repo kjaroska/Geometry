@@ -21,26 +21,19 @@ Which formula do you need?
     (0) Back to main menu
     >>>"""
 
-# def check_negative():
-#     try:
-#         value = float(input("> "))
-#         if value > 0:
-#             return value
-#         else:
-#             raise ValueError("Circle cannot have negative radius")
-#     except ValueError:
-#         print("Circle cannot have negative radius")
 
 def new_circle(shapes):
-        print("Enter circle radius length.")
-        circle = Circle(r)
-        shapes.add_shape(circle)
+    '''Function that instantiates a circle object.'''
+    r = int(input("Enter circle radius length >"))
+    circle = Circle(r)
+    shapes.add_shape(circle)
 
 
 def new_triangle(shapes):
-    print("Enter first side's length.")
-    print("Enter second side's length.")
-    print("Enter third side's length.")
+    '''Function that instantiates a triangle object.'''
+    a = int(input("Enter first side's length >"))
+    b = int(input("Enter second side's length >"))
+    c = int(input("Enter third side's length >"))
     if a == b == c:
         print("Yay, your triangle is an Equilateral triangle!")
         triangle = EquilateralTriangle(a)
@@ -50,8 +43,9 @@ def new_triangle(shapes):
 
 
 def new_rectangle(shapes):
-    print("Enter first side's length.")
-    print("Enter second side's length.")
+    '''Function that instantiates a rectangle object.'''
+    a = int(input ("Enter first side's length >"))
+    b = int(input("Enter second side's length >"))
     if a == b:
         rectangle = Square(a)
     else:
@@ -59,8 +53,9 @@ def new_rectangle(shapes):
     shapes.add_shape(rectangle)
 
 
-def new_regular(shapes):
-    print("Enter side's length.")
+def new_regular(shapes, shape_name):
+    '''Function that instantiates a regular pentagon object.'''
+    a = int(input("Enter side's length >"))
     if shape_name.lower() == "square":
         square = Square(a)
         shapes.add_shape(square)
@@ -72,6 +67,7 @@ def new_regular(shapes):
 
 
 def new_shape(shapes):
+    '''Function asks for input and then creates objects accordingly to users choice'''
     while True:
         shape_name = input("""
     What kind of shape do you want to add? (Enter q for Main Menu)
@@ -87,9 +83,9 @@ def new_shape(shapes):
             elif shape_name.lower() == "rectangle":
                 new_rectangle(shapes)
             elif shape_name.lower() == "square":
-                new_regular(shapes)
+                new_regular(shapes, shape_name)
             elif shape_name.lower() == "regular pentagon":
-                new_regular(shapes)
+                new_regular(shapes, shape_name)
             else:
                 print ("Shape not recognised. Try again")
         except ValueError:
@@ -97,6 +93,7 @@ def new_shape(shapes):
 
 
 def show_formulas():
+    '''Function asks for user's input and then show formula for needed shape'''
     while True:
         formula = input (show_formula)
         if formula.lower() == "0":
@@ -119,15 +116,10 @@ def show_formulas():
 
 
 def main():
+    '''Main body of the program. It shows menu and lets you navigate through user options'''
 
     shapes = ShapeList()  # object containing all shapes added by the user
 
-    test_triangle = Triangle(2, 4, 5)
-    test_square = Square(5)
-    test_circle = Circle(3)
-    shapes.add_shape(test_triangle)
-    shapes.add_shape(test_square)
-    shapes.add_shape(test_circle)
     while True:
         print (menu_options)
         # TODO: implement user interaction here. You can change the code below

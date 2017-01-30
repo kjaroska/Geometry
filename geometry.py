@@ -1,5 +1,12 @@
 import math
 
+'''
+There are some @classmethods like get_area or get_perimeter below.
+They have to be available to whole class instead of just an instance because
+you run them on classes not particular objects.
+'''
+
+
 class Shape:
     """
     This is an abstract class representing geometrical shape.
@@ -12,7 +19,6 @@ class Shape:
         Raises:
             ValueError: If any of the parameters is below 0.
         """
-        self.name = name
 
     @classmethod
     def get_area(cls):
@@ -65,7 +71,7 @@ class Shape:
 
 
 class Circle(Shape):
-
+    '''This class inherits from Shape and creates a circle object'''
     def __init__(self, r):
         if r <= 0:
             raise ValueError
@@ -92,7 +98,7 @@ class Circle(Shape):
         return "Perimeter = 2 × π × r"
 
 class Triangle(Shape):
-
+    '''This class inherits from Shape and creates a triangle object'''
     def __init__(self, a, b, c):
         if a <=0 or b <= 0 or c <=0:
             raise ValueError
@@ -123,7 +129,7 @@ class Triangle(Shape):
 
 
 class EquilateralTriangle(Triangle):
-
+    '''This class inherits from Triangle and creates a equilateral triangle object'''
     def __init__(self, a):
         if a <= 0:
             raise ValueError
@@ -154,7 +160,7 @@ class EquilateralTriangle(Triangle):
 
 
 class Rectangle(Shape):
-
+    '''This class inherits from Shape and creates a rectangle object'''
     def __init__(self, a, b):
         if a <= 0 or b <= 0:
             raise ValueError
@@ -183,9 +189,9 @@ class Rectangle(Shape):
 
 
 class Square(Rectangle):
-
+    '''This class inherits from Rectangle and creates a square object'''
     def __init__(self, a):
-        if a <=0:
+        if a <= 0:
             raise ValueError
         self.name = "Square"
         self.a = a
@@ -212,7 +218,7 @@ class Square(Rectangle):
 
 
 class RegularPentagon(Shape):
-
+    '''This class inherits from Shape and creates a regular pentagon object'''
     def __init__(self, a):
         if a <= 0:
             raise ValueError
@@ -240,11 +246,12 @@ class RegularPentagon(Shape):
 
 
 class ShapeList:
-
+    '''This class contains all shapes added by the user'''
     def __init__(self):
         self.shapes = []
 
     def get_largest_shape_by_perimeter(self):
+        '''Function returns shape with a highest perimeter'''
         max_perimeter = 0
         for i in range(len(self.shapes)):
             for shape in self.shapes:
@@ -256,6 +263,7 @@ class ShapeList:
         return (max_shape)
 
     def get_largest_shape_by_area(self):
+        '''Function returns shape with a highest area'''
         max_area = 0
         for i in range(len(self.shapes)):
             for shape in self.shapes:
@@ -267,12 +275,14 @@ class ShapeList:
         return (max_shape)
 
     def add_shape(self, shape):
+        '''Function adds a new shape. It is used when creating new shapes.'''
         if isinstance(shape, Shape):
             self.shapes.append(shape)
         else:
             raise TypeError("Shape not recognised.")
 
     def get_shapes_table(self):
+        '''This function returns a string formatted table with the most important attributes'''
         area_list = []
         perimeter_list = []
         classname_list = []
@@ -293,8 +303,8 @@ class ShapeList:
             index += 1
 
         class Table:
-
-
+            '''Creates an instance of a Table class columns with a cleaver output. Warning: Dragons and magic lives here.
+            Source: http://code.activestate.com/recipes/577202-render-tables-for-text-interface/'''
             def __init__(self, *columns):
                 self.columns = columns
                 self.length = max(len(col.data) for col in columns)
